@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ладносмотр</title>
+    <link rel="icon" type="image/png" href="Л.png">
+    <style>
+        body {
+            font-weight: bold;
+            margin: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            background-color: #ffffff;
+            color: #000;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 100%;
+            max-width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .search-bar {
+            margin-left: auto;
+            margin-right: 30px;
+        }
+        
+        .search-bar input {
+            padding: 5px;
+            font-size: 16px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
+        aside {
+            width: 220px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 80px;
+            overflow-y: auto;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        aside ul li {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        aside .login {
+            display: block;
+            margin-top: 20px;
+            padding: 5px;
+            width: 98%;
+            font-size: 16px;
+            background-color: #f8f8f8;
+            color: #ff7300;
+            border: 2px solid #ff7300;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        aside .login:hover {
+            background-color: #ff7300;
+            color: #f8f8f8;
+        }
+
+        ul li a {
+            display: inline-block;
+            width: 98%;
+            height: 30px;
+            line-height: 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: -10px;
+            padding: 5px;
+            border: 2px solid rgba(0, 0, 0, 0);
+            color: #000;
+            transition: color 0.3s, background-color 0.3s, padding 0.3s, border 0.3s;
+        }
+
+        ul li a:hover {
+            color: #ff7300;
+            background-color: #00000013;
+            border-radius: 10px;
+        }
+
+        ul li a img {
+            width: 20px;
+        }
+
+        main {
+            margin-left: 240px;
+            margin-top: 120px;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            justify-content: space-between;
+        }
+        .video {
+            width: 47%;
+            background-color: white;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .video a .video-content h2 {
+            color: #000;
+        }
+        .video:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .video img {
+            width: 100%;
+            height: auto;
+        }
+        .video-content {
+            padding: 10px;
+        }
+        .video-content h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .video-content p {
+            color: #606060;
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        main a .video .video-content h2 {
+            color: #000;
+        }
+        
+        .video-container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: relative;
+            max-width: 35%;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .info {
+            text-align: left;
+            width: 50%;
+        }
+
+        .info p {
+            color: #4c4c4c;
+        }
+
+        .info p a {
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            color: rgb(0, 0, 0);
+            padding: 5px;
+            border-radius: 5px;
+            margin-left: 20px;
+            transition: padding 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .info p a:hover {
+            padding: 7px;
+            background-color: #ffffff;
+            color: #ff7300;
+        }
+
+        button#subscribeBtn {
+            font-size: 16px;
+            background-color: #f8f8f8;
+            color: #ff7300;
+            border: 2px solid #ff7300;
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+            border: none;
+        }
+
+        button#subscribeBtn:hover {
+            background-color: #ff7300;
+            color: #f8f8f8;
+        }
+
+        @media (max-width: 400px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                max-width: 150px;
+                
+            }
+
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 10px;
+                margin-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img class="logo" src="Ладносмотр (1).png" alt="Ладносмотр"></a>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search">
+        </div>
+    </header>
+    <aside>
+        <ul>
+            <li><a href="index.html">🏠 Главная</a></li>
+            <li><a href="">📱 Shorts</a></li>
+            <li><a href="index.html">❤️ Подписки</a></li>
+        </ul>
+        <h1>Навигатор</h1>
+        <ul>
+            <li><a href="index.html">👀 Обзор</a></li>
+            <li><a href="index.html">☕ Кофе</a></li>
+            <li><a href="index.html">🎮 Игры на пк</a></li>
+            <li><a href="index.html">📱 Моб. гейминг</a></li>
+            <li><a href="index.html">🎧 ASMR</a></li>
+            <li><a href="index.html">📺 Стримы</a></li>
+            <li><a href="index.html">🎵 Музыка</a></li>
+            <br><br>
+            <li><a href="">🔧 Настройки</a></li>
+            <li><a href="https://t.me/TupoLadno">💬 оставить отзыв</a></li>
+            <li><a href="https://t.me/TupoLadno">❔ Поддержка</a></li>
+            <li><a href="https://www.donationalerts.com/r/mocrosoft">💰 Поддержать</a></li>
+        </ul>
+        <br><br><br><br>
+    </aside>
+    <main>
+        <div class="video-container">
+            <video id="videoPlayer" controls>
+                <source src="а теперь припев.mp4" type="video/mp4" id="videoSource">
+                Ваш браузер не поддерживает HTML5 видео.
+            </video>
+        </div>
+        <div class="info">
+            <h2>А теперь припев</h2>
+            <p>Канал: Артем Винтур ♫ <button id="subscribeBtn">❤️ Подписаться</button></p>
+            <p>Дата выхода: 16.03.2024</p>
+            <br>
+            <h3>Описание видео:</h3>
+            <p>А теперь припев · Артём Винтур · Артём Александрюк</p>
+            <p>А теперь припев</p>
+            <p>℗ Артём Винтур</p>
+            <p>Released on: 2024-05-16</p>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация кнопки подписки
+            function initSubscriptionButton() {
+                const subscribeBtn = document.getElementById('subscribeBtn');
+                if (!subscribeBtn) {
+                    console.error('Кнопка подписки не найдена');
+                    return;
+                }
+
+                const channelName = 'Артем Винтур'; // Имя канала
+
+                function getSubscriptions() {
+                    let subscriptions = localStorage.getItem('subscriptions');
+                    return subscriptions ? JSON.parse(subscriptions) : [];
+                }
+
+                function saveSubscriptions(subscriptions) {
+                    localStorage.setItem('subscriptions', JSON.stringify(subscriptions));
+                }
+
+                let subscriptions = getSubscriptions();
+                let isSubscribed = subscriptions.includes(channelName);
+
+                // Установка текста кнопки в зависимости от состояния подписки
+                subscribeBtn.textContent = isSubscribed ? '💔 Отписаться' : '❤️ Подписаться';
+
+                subscribeBtn.addEventListener('click', function() {
+                    if (isSubscribed) {
+                        // Отписка
+                        subscriptions = subscriptions.filter(name => name !== channelName);
+                    } else {
+                        // Подписка
+                        subscriptions.push(channelName);
+                    }
+                    saveSubscriptions(subscriptions);
+                    // Обновление текста кнопки
+                    isSubscribed = !isSubscribed;
+                    subscribeBtn.textContent = isSubscribed ? '💔 Отписаться' : '❤️ Подписаться';
+                });
+            }
+
+            // Вызов функции при загрузке страницы
+            initSubscriptionButton();
+        });
+    </script>
+</body>
+</html>
